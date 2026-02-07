@@ -1,15 +1,18 @@
 import streamlit as st
 import pandas as pd
 
-# FORCE LIGHT MODE CSS
+# 1. Force the page config to light mode and wide layout
+st.set_page_config(
+    page_title="Super Bowl LX Leaderboard", 
+    layout="wide",
+    initial_sidebar_state="collapsed",
+)
+
+# 2. Corrected CSS Injection (Fixed the TypeError)
 st.markdown(
     """
     <style>
-    /* Force light mode colors */
-    :root {
-        --section-background-color: #ffffff;
-        --primary-text-color: #262730;
-    }
+    /* Force light mode background and text */
     [data-testid="stAppViewContainer"] {
         background-color: #ffffff !important;
         color: #262730 !important;
@@ -17,17 +20,14 @@ st.markdown(
     [data-testid="stHeader"] {
         background: rgba(0,0,0,0) !important;
     }
-    /* Ensure tables/dataframes look right */
-    .stDataFrame, .stTable {
-        background-color: #ffffff !important;
+    /* Fix table text colors for light background */
+    .stTable, .stDataFrame, [data-testid="stMarkdownContainer"] p {
+        color: #262730 !important;
     }
     </style>
     """,
-    unsafe_allow_index=True
+    unsafe_allow_html=True  # This was the fixed line
 )
-
-st.set_page_config(page_title="Super Bowl LX Leaderboard", layout="wide")
-st.title("🏆 Super Bowl LX Prop Leaderboard")
 
 # The ID from your URL
 SHEET_ID = "1Jez5rn46YU1VV4E-qS204aX3AOoB8qg_M-KurRDPXVw"

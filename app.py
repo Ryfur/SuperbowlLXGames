@@ -12,21 +12,34 @@ st.set_page_config(
 st.markdown(
     """
     <style>
-    /* Force light mode background and text */
-    [data-testid="stAppViewContainer"] {
+    /* 1. Force the main container to white */
+    .stApp, [data-testid="stAppViewContainer"], .main {
         background-color: #ffffff !important;
         color: #262730 !important;
     }
-    [data-testid="stHeader"] {
-        background: rgba(0,0,0,0) !important;
+
+    /* 2. Force the header and any overlays to white */
+    [data-testid="stHeader"], [data-testid="stToolbar"] {
+        background-color: #ffffff !important;
     }
-    /* Fix table text colors for light background */
-    .stTable, .stDataFrame, [data-testid="stMarkdownContainer"] p {
+
+    /* 3. Force all text to dark grey (Standard Light Theme Text) */
+    h1, h2, h3, p, span, div, .stMarkdown {
         color: #262730 !important;
+    }
+
+    /* 4. Fix table and dataframe backgrounds */
+    [data-testid="stTable"], [data-testid="stDataFrame"], [data-testid="stMetric"] {
+        background-color: #ffffff !important;
+    }
+    
+    /* 5. Hide the dark/light toggle if it appears */
+    button[title="Settings"], button[title="View fullscreen"] {
+        visibility: hidden;
     }
     </style>
     """,
-    unsafe_allow_html=True  # This was the fixed line
+    unsafe_allow_html=True
 )
 
 # The ID from your URL

@@ -1,6 +1,31 @@
 import streamlit as st
 import pandas as pd
 
+# FORCE LIGHT MODE CSS
+st.markdown(
+    """
+    <style>
+    /* Force light mode colors */
+    :root {
+        --section-background-color: #ffffff;
+        --primary-text-color: #262730;
+    }
+    [data-testid="stAppViewContainer"] {
+        background-color: #ffffff !important;
+        color: #262730 !important;
+    }
+    [data-testid="stHeader"] {
+        background: rgba(0,0,0,0) !important;
+    }
+    /* Ensure tables/dataframes look right */
+    .stDataFrame, .stTable {
+        background-color: #ffffff !important;
+    }
+    </style>
+    """,
+    unsafe_allow_index=True
+)
+
 st.set_page_config(page_title="Super Bowl LX Leaderboard", layout="wide")
 st.title("🏆 Super Bowl LX Prop Leaderboard")
 

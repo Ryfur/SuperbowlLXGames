@@ -73,19 +73,37 @@ try:
         col1, col2 = st.columns([1, 2])
         
         with col1:
-            st.subheader("Leaderboard")
+            st.subheader("Props Game Leaderboard")
             st.table(leaderboard.reset_index(drop=True))
         
         with col2:
             st.subheader("Score Distribution")
-            # Removed theme=None to prevent the TypeError
-            # Explicit color ensures bars are visible even if text is faint
-            st.bar_chart(
-                data=leaderboard, 
-                x="Name", 
-                y="Total Score",
-                color="#d33612"
-            )
+            
+            # Using the advanced chart to force black text/labels
+            st.vega_lite_chart(leaderboard, {
+                'mark': {'type': 'bar', 'color': '#d33612'},
+                'encoding': {
+                    'x': {
+                        'field': 'Name', 
+                        'type': 'nominal', 
+                        'title': 'Player',
+                        'axis': {'labelColor': '#000000', 'titleColor': '#000000'}
+                    },
+                    'y': {
+                        'field': 'Total Score', 
+                        'type': 'quantitative', 
+                        'title': 'Score',
+                        'axis': {'labelColor': '#000000', 'titleColor': '#000000'}
+                    },
+                },
+                'config': {
+                    'view': {'stroke': 'transparent'},
+                    'axis': {
+                        'labelFontSize': 12,
+                        'titleFontSize': 14
+                    }
+                }
+            }, use_container_width=True)
             
     else:
         st.warning("Ensure there is a row in 'MasterKey' where the Name is 'MASTER'.")

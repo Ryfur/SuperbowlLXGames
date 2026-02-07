@@ -92,13 +92,13 @@ try:
         
         with col2:
             st.subheader("Score Distribution")
-            # theme=None is the key to preventing the chart from turning black in Google Sites
+            # Removed the theme=None argument to fix the error
+            # We use the color argument to force it to be visible
             st.bar_chart(
                 data=leaderboard, 
                 x="Name", 
                 y="Total Score", 
-                theme=None, 
-                color="#d33612"
+                color="#d33612" 
             )
             
     else:
